@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} Ranking {% endblock %}
+
+{% block content %}
+    <div class="container fluid">
+        <div class="card-body">
+            <h2>Start time: {{ quiz.start_time }}</h2>
+            <h2>End time: {{ quiz.end_time }}</h2>
+            <h3>Duration: {{ duration }}</h3>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row clearfix">
+    </div>
+    <div class="jumbotron">
+        <div class="panel panel-primary">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ question|safe }}</h3>
+                </div>
+                <div class="panel-body">
+                    {% for answer in answers %}
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="answer" id="" value="{{ answer|safe }}"
+                                        {% if forloop.first %}> checked {% endif %}>{{ answer|safe }}
+                            </label>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar">0%
+                    </div>
+                    <br><br>
+                    <button id="next-button">Next</button>
+                    <script>
+                        function updateProgressBar() {
+                            const progressBar = document.getElementById('progress-bar');
+                            let width = 0;
+                            let interval
+
+                            function startprogressBar() {
+                                interval = setInterval(function () {
+                                    if (width >= 100) {
+                                        clearInterval(interval)
+                                    } else {
+                                        width++;
+                                        document.getElementById('progress-bar').style.width = width + '%';
+                                        document.getElementById('progress-bar').innerHTML = width + '%';
+                                    }
+                                }, 1000);
+                            }
+
+                            function stopProgressBar() {
+                                clearInterval(interval);
+                            }
+
+                            document.getElementById('next-button').addEventListener('click', function () {
+                                startprogressBar();
+                            });
+                        }
+                    </script>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
